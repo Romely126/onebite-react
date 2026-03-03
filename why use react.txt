@@ -1,0 +1,24 @@
+1. 컴포넌트 기반 UI 작성 (재사용성)
+2. 화면 업데이트 구현이 쉬움 (선언형 프로그래밍, 캡슐화같음)
+-> 무엇을 보여줄지 기술하는 선언형 방식 (상태값에 따라 보여주는 화면이 다름)
+컴포넌트에는 state 변수가 있음 (상태, 값에 따라 렌더링 결과를 다르게 출력가능)
+
+3. 화면 업데이트가 빠름
+
+브라우저 렌더링 과정 (Critical Rendering Path)
+HTML -> DOM
+
+            -> RenderTree -> Layout -> Painting 
+                            <reflow>    <repaint>
+CSS -> CSSOM
+
+DOM : 요소들의 배치 위치 모양의 정보
+CSSOM : 요소들의 스타일과 관련된 정보
+RenderTree : 웹페이지의 청사진
+Layout : 요소의 배치를 잡는 과정
+Painting : 실제로 화면에 그려내는 과정
+
+* JS를 수정하면 (렌더하는 요소가 변경되면) 페이지 렌더가 새로진행됨
+* DOM 수정(innerHTML 등)시 렌더트리, 리플로우, 리페인트를 진행 (이 두개는 매우 오래 걸림)
+* DOM 직접 수정 시 동시발생하는 업데이트들을 묶어서 한번에 수정해야한다
+-> React는 Virtual DOM을 활용해 업데이트를 VR DOM에서 미리 처리하고 한번에 모아(Batch Update) Actual DOM을 한번에 수정
